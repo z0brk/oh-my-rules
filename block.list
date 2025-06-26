@@ -1,0 +1,7 @@
+# 屏蔽Adobe Photoshop软件弹窗 PS
+DOMAIN,ic.adobe.io
+DOMAIN-REGEX,^[a-z\d]{10}\.adobe\.io$
+DOMAIN-SUFFIX,adobestats.io
+DOMAIN,cc-api-data.adobe.io
+# DOMAIN,cc-cdn.adobe.com,DIRECT
+# DOMAIN,ccmdls.adobe.com,DIRECT
