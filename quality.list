@@ -1,0 +1,47 @@
+# 优质服务例外，先于外部 AI 规则匹配，避免共享域名全部计入 AI。
+
+# GitHub 普通 API；Git/LFS 进程的流量例外优先于本列表。
+DOMAIN,api.github.com
+
+# Microsoft / JetBrains 共享登录
+DOMAIN,login.live.com
+DOMAIN,login.microsoftonline.com
+DOMAIN,account.jetbrains.com
+DOMAIN,oauth.account.jetbrains.com
+
+# AI Suite 中供多个产品共用的登录、客服与支付资源。
+DOMAIN,cdn.workos.com
+DOMAIN,forwarder.workos.com
+DOMAIN,images.workoscdn.com
+DOMAIN,setup.workos.com
+DOMAIN,workos.imgix.net
+DOMAIN-SUFFIX,intercom.io
+DOMAIN-SUFFIX,intercomcdn.com
+DOMAIN,js.stripe.com
+DOMAIN,default.exp-tas.com
+
+# AI Suite 同时收录的 Google 通用服务
+DOMAIN,apis.google.com
+DOMAIN,content-autofill.googleapis.com
+DOMAIN,csp.withgoogle.com
+DOMAIN,encrypted-tbn0.gstatic.com
+DOMAIN,encrypted-tbn1.gstatic.com
+DOMAIN,encrypted-tbn2.gstatic.com
+DOMAIN,encrypted-tbn3.gstatic.com
+DOMAIN,fonts.googleapis.com
+DOMAIN,fonts.gstatic.com
+DOMAIN,jnn-pa.googleapis.com
+DOMAIN,lh3.google.com
+DOMAIN,lh3.googleusercontent.com
+DOMAIN,lh5.googleusercontent.com
+DOMAIN,maps.googleapis.com
+DOMAIN,maps.gstatic.com
+DOMAIN,ogs.google.com
+DOMAIN,optimizationguide-pa.googleapis.com
+DOMAIN,play.google.com
+DOMAIN,ssl.gstatic.com
+DOMAIN,streetviewpixels-pa.googleapis.com
+
+# 插件商店网页与共享验证服务；插件文件域名在 traffic.list。
+DOMAIN-SUFFIX,open-vsx.org
+DOMAIN,challenges.cloudflare.com

@@ -1,0 +1,27 @@
+# 直连补充列表
+# 自有服务旧关键词暂留；确认实际域名后再收紧，避免猜测后缀导致已有服务改走代理。
+DOMAIN-KEYWORD,rayae
+DOMAIN-KEYWORD,z0brk
+DOMAIN-KEYWORD,ngcdc
+
+# 游戏
+DOMAIN,gst.prod.dl.playstation.net
+DOMAIN-SUFFIX,steamcontent.com
+
+# NTP 已在配置中按目标端口 123 直连，不再匹配整个域名关键词。
+
+# 明确的 GitHub 镜像域名，不将所有含 mirror/proxy 的域名直连。
+DOMAIN,ghproxy.net
+DOMAIN,gh-proxy.com
+DOMAIN,cdn.gh-proxy.com
+DOMAIN,ghfast.top
+
+# 已有直连 AI 中转；ikuncode.cc 按现用覆写放入 proxy.list。
+DOMAIN,privnode.com
+DOMAIN,88code.ai
+DOMAIN,88code.org
+DOMAIN,www.88code.org
+DOMAIN,tiger.bookapi.cc
+DOMAIN,www.vbcode.io
+DOMAIN,hk.vbcode.io
+

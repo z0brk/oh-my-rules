@@ -1,0 +1,37 @@
+# 大流量例外：专用文件域名，或 Git 进程与 GitHub 目标的交集。
+# shortcut: 共用 HTTPS 域名上的浏览器/API 文件响应无法按路径识别，需要时给下载工具指定独立代理。
+
+# Git over HTTPS / LFS；不匹配普通浏览器、IDE 或 curl 的全部请求。
+AND,((PROCESS-NAME-REGEX,^(git|git-remote-http|git-remote-https|git-lfs)(\.exe)?$),(DOMAIN-SUFFIX,github.com))
+# Git over SSH（包括 SSH 的 443 入口）
+AND,((DOMAIN,github.com),(DST-PORT,22))
+AND,((PROCESS-NAME,ssh),(DOMAIN,github.com))
+DOMAIN,ssh.github.com
+
+# GitHub Release / 源码归档 / Raw / LFS 对象
+DOMAIN,release-assets.githubusercontent.com
+DOMAIN,objects.githubusercontent.com
+DOMAIN,media.githubusercontent.com
+DOMAIN,raw.githubusercontent.com
+DOMAIN,codeload.github.com
+DOMAIN,uploads.github.com
+DOMAIN,github-cloud.s3.amazonaws.com
+DOMAIN,github-production-release-asset-2e65be.s3.amazonaws.com
+DOMAIN,github-production-repository-file-5c1aeb.s3.amazonaws.com
+DOMAIN,github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+
+# 包、容器镜像和开发工具安装文件；不包含这些服务的普通官网。
+DOMAIN,ghcr.io
+DOMAIN,pkg-containers.githubusercontent.com
+DOMAIN,docker.pkg.github.com
+DOMAIN,registry.npmjs.org
+DOMAIN,files.pythonhosted.org
+DOMAIN,repo.maven.apache.org
+DOMAIN,repo1.maven.org
+DOMAIN,maven.google.com
+DOMAIN,dl.google.com
+DOMAIN,download.jetbrains.com
+DOMAIN,download-cdn.jetbrains.com
+DOMAIN,openvsx.eclipsecontent.org
+DOMAIN,update.code.visualstudio.com
+DOMAIN,vscode.download.prss.microsoft.com

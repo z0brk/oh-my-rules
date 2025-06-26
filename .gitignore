@@ -1,0 +1,7 @@
+*.bak
+*.yml
+!config-template.yml
+!config-template-mirror.yml
+config.js
+
+upload-dav.sh

@@ -1,0 +1,209 @@
+# AI 与优质服务优先优质节点，故障后使用通过业务检测的普通节点；保留手动选择。
+PProviders: &PProviders {type: http, proxy: DIRECT, interval: 86400, health-check: {enable: true, url: 'https://cp.cloudflare.com', expected-status: 204, interval: 300}, filter: '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|等级|收藏|超时|福利|剩余|总量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'}
+FilterAll: &FilterAll '^(?!.*(DIRECT|预计|邀请|返利|官网|客服|订阅|到期|机场|过期|已用|通知|说明|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
+FilterAsia: &FilterAsia '(?i)(亚洲|香港|澳门|澳門|沙特|台湾|台灣|日本|韩国|韓國|新加坡|印度|泰国|越南|马来西亚|菲律宾|印尼|土耳其|以色列|阿联酋|港|台|日|韩|坡|🇭🇰|🇲🇴|🇸🇦|🇹🇼|🇯🇵|🇰🇷|🇸🇬|🇮🇳|🇹🇭|🇻🇳|🇲🇾|🇵🇭|🇮🇩|Hong\s*Kong|Macau|Macao|Saudi|Taiwan|Japan|Korea|Singapore|India|Thailand|Vietnam|Malaysia|Philippines|Indonesia|Turkey|Israel|Emirates|(?<![A-Za-z])(HK|HKG|MO|MFM|SA|SAU|TW|TPE|JP|NRT|HND|KIX|KR|ICN|SG|SIN|IN|TH|VN|MY|PH|ID|TR|IL|AE)(?![A-Za-z]))'
+FilterAmerica: &FilterAmerica '(?i)(美洲|美国|美國|美西|美东|美東|加拿大|巴西|墨西哥|阿根廷|智利|哥伦比亚|洛杉矶|西雅图|🇺🇸|🇨🇦|🇧🇷|🇲🇽|🇦🇷|🇨🇱|🇨🇴|United\s*States|America|Canada|Brazil|Mexico|Argentina|Chile|Colombia|(?<![A-Za-z])(US|USA|JFK|LAX|ORD|SFO|SEA|IAD|CA|CAN|YYZ|YVR|BR|BRA|MX|MEX|AR|ARG|CL|CHL|CO|COL|BOG)(?![A-Za-z]))'
+FilterEurope: &FilterEurope '(?i)(欧洲|歐洲|欧盟|英国|英國|德国|德國|法国|法國|荷兰|荷蘭|瑞士|瑞典|芬兰|挪威|丹麦|波兰|爱尔兰|奥地利|西班牙|意大利|比利时|葡萄牙|捷克|罗马尼亚|希腊|匈牙利|乌克兰|俄罗斯|🇬🇧|🇩🇪|🇫🇷|🇳🇱|🇨🇭|🇸🇪|🇫🇮|🇳🇴|🇩🇰|🇵🇱|🇮🇪|🇦🇹|🇪🇸|🇮🇹|🇧🇪|🇵🇹|🇨🇿|🇷🇴|🇬🇷|🇭🇺|🇺🇦|🇷🇺|Europe|Britain|United\s*Kingdom|Germany|France|Netherlands|Switzerland|Sweden|Finland|Norway|Denmark|Poland|Ireland|Austria|Spain|Italy|Belgium|Portugal|Czech|Romania|Greece|Hungary|Ukraine|Russia|(?<![A-Za-z])(UK|GB|LHR|DE|FRA|FR|CDG|NL|AMS|CH|SE|FI|NO|DK|PL|IE|AT|ES|IT|BE|PT|CZ|RO|GR|HU|UA|UKR|RU)(?![A-Za-z]))'
+FilterOther: &FilterOther '(?i)^(?!.*(?:(亚洲|香港|澳门|澳門|沙特|台湾|台灣|日本|韩国|韓國|新加坡|印度|泰国|越南|马来西亚|菲律宾|印尼|土耳其|以色列|阿联酋|港|台|日|韩|坡|🇭🇰|🇲🇴|🇸🇦|🇹🇼|🇯🇵|🇰🇷|🇸🇬|🇮🇳|🇹🇭|🇻🇳|🇲🇾|🇵🇭|🇮🇩|Hong\s*Kong|Macau|Macao|Saudi|Taiwan|Japan|Korea|Singapore|India|Thailand|Vietnam|Malaysia|Philippines|Indonesia|Turkey|Israel|Emirates|(?<![A-Za-z])(HK|HKG|MO|MFM|SA|SAU|TW|TPE|JP|NRT|HND|KIX|KR|ICN|SG|SIN|IN|TH|VN|MY|PH|ID|TR|IL|AE)(?![A-Za-z]))|(美洲|美国|美國|美西|美东|美東|加拿大|巴西|墨西哥|阿根廷|智利|哥伦比亚|洛杉矶|西雅图|🇺🇸|🇨🇦|🇧🇷|🇲🇽|🇦🇷|🇨🇱|🇨🇴|United\s*States|America|Canada|Brazil|Mexico|Argentina|Chile|Colombia|(?<![A-Za-z])(US|USA|JFK|LAX|ORD|SFO|SEA|IAD|CA|CAN|YYZ|YVR|BR|BRA|MX|MEX|AR|ARG|CL|CHL|CO|COL|BOG)(?![A-Za-z]))|(欧洲|歐洲|欧盟|英国|英國|德国|德國|法国|法國|荷兰|荷蘭|瑞士|瑞典|芬兰|挪威|丹麦|波兰|爱尔兰|奥地利|西班牙|意大利|比利时|葡萄牙|捷克|罗马尼亚|希腊|匈牙利|乌克兰|俄罗斯|🇬🇧|🇩🇪|🇫🇷|🇳🇱|🇨🇭|🇸🇪|🇫🇮|🇳🇴|🇩🇰|🇵🇱|🇮🇪|🇦🇹|🇪🇸|🇮🇹|🇧🇪|🇵🇹|🇨🇿|🇷🇴|🇬🇷|🇭🇺|🇺🇦|🇷🇺|Europe|Britain|United\s*Kingdom|Germany|France|Netherlands|Switzerland|Sweden|Finland|Norway|Denmark|Poland|Ireland|Austria|Spain|Italy|Belgium|Portugal|Czech|Romania|Greece|Hungary|Ukraine|Russia|(?<![A-Za-z])(UK|GB|LHR|DE|FRA|FR|CDG|NL|AMS|CH|SE|FI|NO|DK|PL|IE|AT|ES|IT|BE|PT|CZ|RO|GR|HU|UA|UKR|RU)(?![A-Za-z]))))'
+# include-all-proxies 仅兼容订阅转换后平铺的默认节点，不自动引入其他 provider。
+MainNodes: &MainNodes {include-all-proxies: true, use: [默认节点池], filter: *FilterAll, exclude-filter: '流量|落地|未配置|剩余|到期|订阅|官网|客服', empty-fallback: REJECT}
+# 默认与流量用途的手动候选覆盖全部真实节点。
+AllNodes: &AllNodes {include-all-proxies: true, include-all-providers: true, filter: *FilterAll, exclude-filter: '未配置|剩余|总量|到期|订阅|官网|客服|重置', empty-fallback: REJECT}
+# exclude-filter 也影响显式分组，精确放行“流量自动”以保留策略选择。
+NonTrafficNodes: &NonTrafficNodes {<<: *AllNodes, exclude-filter: '(?i)^(?!流量自动$).*(流量|免费|free|未配置|剩余|总量|到期|订阅|官网|客服|重置)'}
+QualityNodes: &QualityNodes {include-all-proxies: true, include-all-providers: true, filter: '优质', exclude-filter: '流量|未配置|剩余|总量|到期|订阅|官网|客服', empty-fallback: REJECT}
+BackupNodes: &BackupNodes {<<: *NonTrafficNodes, exclude-filter: '(?i)优质|流量|免费|free|未配置|剩余|总量|到期|订阅|官网|客服|重置'}
+# 流量节点以名称中的标记归类，兼容平铺、合并订阅和独立 provider。
+TrafficNodes: &TrafficNodes {include-all-proxies: true, include-all-providers: true, filter: '流量', exclude-filter: '未配置|剩余|总量|到期|订阅|官网|客服|重置', empty-fallback: REJECT}
+Auto: &Auto {type: url-test, interval: 300, tolerance: 50, lazy: true, timeout: 5000, max-failed-times: 3, hidden: false, empty-fallback: REJECT}
+Failover: &Failover {type: fallback, interval: 60, lazy: false, timeout: 5000, max-failed-times: 3, hidden: true, empty-fallback: REJECT}
+DomainMrs: &DomainMrs {type: http, interval: 86400, proxy: 默认代理, behavior: domain, format: mrs}
+DomainYaml: &DomainYaml {type: http, interval: 86400, proxy: 默认代理, behavior: domain, format: yaml}
+IPcidrMrs: &IPcidrMrs {type: http, interval: 86400, proxy: 默认代理, behavior: ipcidr, format: mrs}
+IPcidrYaml: &IPcidrYaml {type: http, interval: 86400, proxy: 默认代理, behavior: ipcidr, format: yaml}
+ClassicalText: &ClassicalText {type: http, interval: 86400, proxy: 默认代理, behavior: classical, format: text}
+ClassicalYaml: &ClassicalYaml {type: http, interval: 86400, proxy: 默认代理, behavior: classical, format: yaml}
+
+# 远程订阅组：保留现有默认订阅。优质池只填认可的节点，流量池可接免费或低成本订阅。
+# 将对应池改为 http provider 即可接入订阅，名称和用途组无需变更；订阅转换得到的默认节点也可放在顶层 proxies。
+proxy-providers:
+  默认节点池: {type: inline, payload: [{name: 默认节点池未配置, type: reject}]}
+  优质节点池: {type: inline, payload: [{name: 优质节点池未配置, type: reject}]}
+  流量节点池: {type: inline, payload: [{name: 流量节点池未配置, type: reject}]}
+
+# 全局配置
+port: 7890
+socks-port: 7891
+mixed-port: 7892
+redir-port: 7893
+tproxy-port: 7894
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: always
+allow-lan: true
+bind-address: '*'
+mode: rule
+log-level: warning
+ipv6: true
+udp: true
+keep-alive-idle: 600
+keep-alive-interval: 15
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+external-controller: 0.0.0.0:9090
+external-ui-url: https://gh-proxy.com/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
+external-ui: ui
+external-ui-name: zashboard
+secret:
+
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain: ['rule-set:cn_domain,private_domain,aaa_direct', 'Mijia Cloud', '+.push.apple.com', '+.wechat.com', '+.qpic.cn', '+.qq.com', '+.wechatapp.com', '+.vivox.com', '+.oray.com', '+.sunlogin.net'] # 忽略嗅探
+
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack: ['any:53']
+
+dns:
+  enable: true
+  ipv6: true
+  use-hosts: true
+  use-system-hosts: true
+  prefer-h3: false
+  respect-rules: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  fake-ip-filter-mode: blacklist
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  # 代理节点域名独立解析，避免 DNS 查询依赖代理自身
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query
+    - https://doh.pub/dns-query
+  nameserver:
+    - https://223.5.5.5/dns-query
+    - https://doh.pub/dns-query
+  fake-ip-filter: 
+    - '+.lan'
+    - '+.local'
+    - 'geosite:connectivity-check'
+    - 'geosite:cn,private'
+    - 'rule-set:cn_domain,private_domain,aaa_direct'
+  nameserver-policy: # 根据规则集设置不同的 DNS 服务器
+    "geosite:cn,private":
+      - https://223.5.5.5/dns-query
+      - https://doh.pub/dns-query
+      - https://doh.360.cn/dns-query
+      - tls://223.5.5.5
+      - tls://dot.pub
+    "rule-set:cn_domain,private_domain":
+      - https://223.5.5.5/dns-query
+      - https://doh.pub/dns-query
+      - https://doh.360.cn/dns-query
+      - tls://223.5.5.5
+      - tls://dot.pub     
+  direct-nameserver: []
+
+# 用途组共享分组选项，具体节点按用途筛选；自动组按各自 URL 独立检测。
+proxy-groups:
+  - {name: AI平台, type: select, <<: *NonTrafficNodes, proxies: [AI自动, 优质自动, 默认自动, 流量自动, 自建自动, 落地服务, 亚洲节点, 美洲节点, 欧洲节点, 其他地区], icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Bot.png'}
+  - {name: 优质服务, type: select, <<: *NonTrafficNodes, proxies: [优质自动, AI自动, 默认自动, 流量自动, 自建自动, 落地服务, 亚洲节点, 美洲节点, 欧洲节点, 其他地区], icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/VIP.png'}
+  - {name: 流量服务, type: select, <<: *AllNodes, proxies: [流量自动, AI自动, 优质自动, 默认自动, 自建自动, 落地服务, 亚洲节点, 美洲节点, 欧洲节点, 其他地区], icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Download.png'}
+  - {name: 默认代理, type: select, <<: *AllNodes, proxies: [默认自动, AI自动, 优质自动, 流量自动, 自建自动, 落地服务, 亚洲节点, 美洲节点, 欧洲节点, 其他地区], icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Proxy.png'}
+
+  # 池内测速选优，池间优先使用优选池；两池使用相同的业务检测。
+  - {name: AI自动, <<: *Failover, proxies: [AI优选, AI备用], url: 'https://api.openai.com/v1/models', expected-status: 401, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Bot.png'}
+  - {name: 优质自动, <<: *Failover, proxies: [优质优选, 优质备用], url: 'https://github.com/robots.txt', expected-status: 200, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/VIP.png'}
+  - {name: AI优选, <<: [*Auto, *QualityNodes], hidden: true, interval: 60, lazy: false, url: 'https://api.openai.com/v1/models', expected-status: 401, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Bot.png'}
+  - {name: 优质优选, <<: [*Auto, *QualityNodes], hidden: true, interval: 60, lazy: false, url: 'https://github.com/robots.txt', expected-status: 200, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/VIP.png'}
+  - {name: AI备用, <<: [*Auto, *BackupNodes], hidden: true, interval: 60, lazy: false, url: 'https://api.openai.com/v1/models', expected-status: 401, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Bot.png'}
+  - {name: 优质备用, <<: [*Auto, *BackupNodes], hidden: true, interval: 60, lazy: false, url: 'https://github.com/robots.txt', expected-status: 200, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/VIP.png'}
+  - {name: 默认自动, <<: [*Auto, *MainNodes], hidden: true, url: 'https://cp.cloudflare.com', expected-status: 204, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png'}
+  - {name: 流量自动, <<: [*Auto, *TrafficNodes], hidden: true, url: 'https://raw.githubusercontent.com/github/gitignore/main/Global/macOS.gitignore', expected-status: 200, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Download.png'}
+  - {name: 自建自动, <<: [*Auto, *MainNodes], filter: '自建', url: 'https://www.gstatic.com/generate_204', expected-status: 204, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Server.png'}
+  - {name: 落地服务, <<: *Auto, include-all-proxies: true, use: [默认节点池], filter: '落地', exclude-filter: '流量|未配置', url: 'https://www.apple.com/library/test/success.html', expected-status: 200, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Domestic.png'}
+
+  # 保留落地节点的 dialer-proxy: 中转服务；中转候选不含落地或用途组，避免回环。
+  - {name: 中转服务, type: select, <<: *MainNodes, proxies: [自建自动, 默认自动, 亚洲节点, 美洲节点, 欧洲节点, 其他地区], icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Round_Robin.png'}
+
+  # 地区自动组置底；其他地区为默认池减去前三个地区的差集。
+  - {name: 亚洲节点, <<: [*Auto, *MainNodes], filter: *FilterAsia, url: 'https://www.google.com/generate_204', expected-status: 204, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Asia_Map.png'}
+  - {name: 美洲节点, <<: [*Auto, *MainNodes], filter: *FilterAmerica, url: 'https://cp.cloudflare.com/generate_204', expected-status: 204, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/America_Map.png'}
+  - {name: 欧洲节点, <<: [*Auto, *MainNodes], filter: *FilterEurope, url: 'https://detectportal.firefox.com/success.txt', expected-status: 200, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Europe_Map.png'}
+  - {name: 其他地区, <<: [*Auto, *MainNodes], filter: *FilterOther, url: 'https://connectivitycheck.gstatic.com/generate_204', expected-status: 204, icon: 'https://gh-proxy.com/https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png'}
+
+# 规则订阅通过默认出口更新，不依赖流量池，也不经过公共 GitHub 镜像。
+rule-providers:
+  aaa_direct: {<<: *ClassicalText, url: 'https://raw.githubusercontent.com/rayae/oh-my-rules/main/direct.list'}
+  aaa_block: {<<: *ClassicalText, url: 'https://raw.githubusercontent.com/rayae/oh-my-rules/main/block.list'}
+  aaa_ads: {<<: *ClassicalText, url: 'https://raw.githubusercontent.com/rayae/oh-my-rules/main/ads.list'}
+  aaa_proxy: {<<: *ClassicalText, url: 'https://raw.githubusercontent.com/rayae/oh-my-rules/main/proxy.list'}
+  aaa_ai: {<<: *ClassicalText, url: 'https://raw.githubusercontent.com/rayae/oh-my-rules/main/ai.list'}
+  aaa_direct_process: {<<: *ClassicalText, url: 'https://raw.githubusercontent.com/rayae/oh-my-rules/main/dicrec-process.list'}
+  aaa_traffic: {<<: *ClassicalText, url: 'https://raw.githubusercontent.com/rayae/oh-my-rules/main/traffic.list'}
+  aaa_quality: {<<: *ClassicalText, url: 'https://raw.githubusercontent.com/rayae/oh-my-rules/main/quality.list'}
+  download: {<<: *ClassicalYaml, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Download/Download.yaml'}
+  ai_suite: {<<: *ClassicalText, url: 'https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/AI%20Suite.list'}
+  microsoft: {<<: *DomainMrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs'}
+  google: {<<: *DomainMrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs'}
+  apple-cn: {<<: *DomainMrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs'}
+  cloudflare-cn: {<<: *DomainMrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cloudflare-cn.mrs'}
+  category-public-tracker: {<<: *DomainMrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.mrs'}
+  category-ai-!cn: {<<: *DomainMrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs'}
+  geolocation-!cn: {<<: *DomainMrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs'}
+  private_domain: {<<: *DomainMrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs'}
+  cn_domain: {<<: *DomainYaml, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain.yaml'}
+  private_ip: {<<: *IPcidrMrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs'}
+  cn_ip: {<<: *IPcidrYaml, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_IP.yaml'}
+  google_ip: {<<: *IPcidrMrs, url: 'https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs'}
+  lan: {<<: *ClassicalYaml, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml'}
+
+# 从精确例外到通用分类；Git 传输先于 GitHub/Microsoft，普通共享域名先于外部 AI。
+rules:
+  # 拦截与内网
+  - RULE-SET,aaa_block,REJECT-DROP
+  - RULE-SET,aaa_ads,REJECT-DROP
+  - RULE-SET,category-public-tracker,REJECT-DROP
+  - RULE-SET,private_domain,DIRECT
+  - RULE-SET,private_ip,DIRECT,no-resolve
+  - RULE-SET,lan,DIRECT,no-resolve
+  - DST-PORT,123,DIRECT
+  # 明确的本地例外
+  - RULE-SET,aaa_direct,DIRECT
+  - RULE-SET,aaa_direct_process,DIRECT
+  - RULE-SET,aaa_ai,AI平台
+  - RULE-SET,aaa_traffic,流量服务
+  - RULE-SET,aaa_quality,优质服务
+  - RULE-SET,aaa_proxy,默认代理
+  # 外部 AI 与厂商规则
+  - RULE-SET,ai_suite,AI平台
+  - RULE-SET,category-ai-!cn,AI平台
+  - RULE-SET,microsoft,优质服务
+  - RULE-SET,google,优质服务
+  - RULE-SET,google_ip,优质服务,no-resolve
+  # 国内直连；旧下载器/BT 的直连行为保留，不将全部下载程序送入流量池。
+  - RULE-SET,apple-cn,DIRECT
+  - RULE-SET,cloudflare-cn,DIRECT
+  - RULE-SET,download,DIRECT
+  - RULE-SET,cn_domain,DIRECT
+  # 海外与无域名连接
+  - GEOSITE,telegram,默认代理
+  - GEOIP,telegram,默认代理,no-resolve
+  - GEOSITE,x,默认代理
+  - GEOSITE,category-social-media-!cn,默认代理
+  - RULE-SET,geolocation-!cn,默认代理
+  - RULE-SET,cn_ip,DIRECT,no-resolve
+  - GEOIP,CN,DIRECT
+  - MATCH,默认代理
