@@ -1,0 +1,19 @@
+# 优质服务例外，先于外部 AI 规则匹配，避免共享域名全部计入 AI。
+
+# JetBrains 开发认证
+DOMAIN,account.jetbrains.com
+DOMAIN,oauth.account.jetbrains.com
+
+# AI Suite 中供多个产品共用的登录、客服与支付资源。
+DOMAIN,cdn.workos.com
+DOMAIN,forwarder.workos.com
+DOMAIN,images.workoscdn.com
+DOMAIN,setup.workos.com
+DOMAIN,workos.imgix.net
+DOMAIN-SUFFIX,intercom.io
+DOMAIN-SUFFIX,intercomcdn.com
+DOMAIN,js.stripe.com
+
+# 插件商店网页与共享验证服务；插件文件域名在 traffic.list。
+DOMAIN-SUFFIX,open-vsx.org
+DOMAIN,challenges.cloudflare.com

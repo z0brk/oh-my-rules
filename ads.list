@@ -1,0 +1,54 @@
+# 广告拦截补充列表（classical 格式，配合 config.yml 的 aaa_ads 规则集使用）
+# 自动区：由 ./ads-helper.sh 从 anti-AD 同步 WPS/金山系广告域名，请勿手动编辑
+# 手动区：手工维护，同名域名以手动区为准（自动区会去重跳过）
+
+# ===== 自动区开始 =====
+DOMAIN,abroad-ad.kingsoft-office-service.com
+DOMAIN,ad.docer.wps.cn
+DOMAIN,adres.wpscdn.cn
+DOMAIN,adx-static.ksosoft.com
+DOMAIN,api.mini.wps.cn
+DOMAIN,bannera.kingsoft-office-service.com
+DOMAIN,bole.shangshufang.ksosoft.com
+DOMAIN,cloudservice13.kingsoft-office-service.com
+DOMAIN,cloudservice27.kingsoft-office-service.com
+DOMAIN,co-sentry.wps.cn
+DOMAIN,counter.kingsoft.com
+DOMAIN,counter.ksosoft.com
+DOMAIN,crashes.mo.wps.cn
+DOMAIN,docerad.wps.cn
+DOMAIN,dw-collect.ksosoft.com
+DOMAIN,dw-online.ksosoft.com
+DOMAIN,dynsrv.wps.cn
+DOMAIN,gou.wps.cn
+DOMAIN,haiwai-ic.ksosoft.com
+DOMAIN,hoplink.ksosoft.com
+DOMAIN,ic.ksosoft.com
+DOMAIN,ic.wps.cn
+DOMAIN,img.gou.wpscdn.cn
+DOMAIN,img1.mini.cache.wps.cn
+DOMAIN,info.meihua.docer.com
+DOMAIN,info.wps.cn
+DOMAIN,ios-informationplatform.wps.cn
+DOMAIN-SUFFIX,metricswpsh.com
+DOMAIN,minfo.wps.cn
+DOMAIN,mostat.wps.cn
+DOMAIN,news.docer.com
+DOMAIN,notify.wps.cn
+DOMAIN,pc.uf.ksosoft.com
+DOMAIN,pcfg.wps.cn
+DOMAIN,pixiu.shangshufang.ksosoft.com
+DOMAIN,push.wps.cn
+DOMAIN,rating6.kingsoft-office-service.com
+DOMAIN,spinfo.wps.cn
+DOMAIN,teinfo.wps.cn
+DOMAIN,tracker.wpserveur.net
+DOMAIN,uid.ksosoft.com
+DOMAIN-SUFFIX,wpshsdk.com
+DOMAIN,wpsweb-dc.wps.cn
+# ===== 自动区结束 =====
+
+# ===== 手动区 =====
+# —— WPS 更新拦截：要恢复在线更新就删掉下面这行 ——
+DOMAIN,up.wps.kingsoft.com
+# —— 其他软件广告域名，按需补充 ——

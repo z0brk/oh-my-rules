@@ -1,0 +1,7 @@
+# 默认代理补充列表；AI、优质服务和文件传输分别维护。
+
+# 与 Sparkle 现有 ikuncode.cc 覆写保持一致。
+DOMAIN-SUFFIX,ikuncode.cc
+
+# 普通插件网站；商店网页在 quality.list，安装文件在 traffic.list。
+DOMAIN-SUFFIX,tampermonkey.net
