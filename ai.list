@@ -1,0 +1,16 @@
+# 代理补充列表
+
+
+DOMAIN-SUFFIX,poolhub.me
+
+# gemini
+DOMAIN-SUFFIX,aida.googleapis.com
+DOMAIN-SUFFIX,gemini.google.com
+
+# Jetbrains ai
+DOMAIN,api.jetbrains.ai
+DOMAIN,api.app.prod.grazie.aws.intellij.net
+DOMAIN,llm.jetbrains.com
+DOMAIN,api.ai.jetbrains.com.cn
+DOMAIN,account.jetbrains.com
+

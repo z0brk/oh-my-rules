@@ -1,0 +1,47 @@
+
+# MAC 软件
+## 腾讯系
+PROCESS-NAME,TencentMeeting
+PROCESS-NAME,WeChat
+PROCESS-NAME,QQ
+PROCESS-NAME,QQ音乐
+PROCESS-NAME,QQMusic
+PROCESS-NAME,QQ 音乐
+PROCESS-NAME,QQ Helper
+PROCESS-NAME,Wechat
+PROCESS-NAME,微信
+PROCESS-NAME,WeChat
+PROCESS-NAME,企业微信 Helper
+PROCESS-NAME,企业微信
+PROCESS-NAME,WeType
+
+## 阿里
+PROCESS-NAME,DingTalk
+PROCESS-NAME,aDrive Helper
+PROCESS-NAME,aDrive
+PROCESS-NAME,aDrive Helper (Renderer)
+PROCESS-NAME,aDrive
+PROCESS-NAME,QuarkCloudDrive
+
+## 字节
+PROCESS-NAME,抖音
+PROCESS-NAME,抖音 Helper
+
+## 飞书
+PROCESS-NAME,Feishu
+PROCESS-NAME,Lark Helper
+
+## ToDesk
+PROCESS-NAME,ToDesk
+PROCESS-NAME,ToDesk_Service
+
+## 其他
+PROCESS-NAME,jetbrains-toolbox
+PROCESS-NAME,Bob
+PROCESS-NAME,Postman Helper
+PROCESS-NAME,Postman
+PROCESS-NAME,lx-music-desktop
+PROCESS-NAME,WPS Office
+PROCESS-NAME,SunloginClient_Desktop
+PROCESS-NAME,SunloginClient_Helper
+PROCESS-NAME,BaiduNetdisk_mac
