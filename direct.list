@@ -1,0 +1,17 @@
+# 直连补充列表(国内域名不解析时，防止走代理使用)
+DOMAIN-KEYWORD,rayae
+DOMAIN-KEYWORD,ngcdc
+
+# 游戏
+DOMAIN,gst.prod.dl.playstation.net
+DOMAIN-SUFFIX,steamcontent.com
+
+# NTP
+DOMAIN-KEYWORD,ntp
+
+# github proxies
+DOMAIN-KEYWORD,ghproxy
+DOMAIN-KEYWORD,ghfast
+
+# 镜像加速
+DOMAIN-KEYWORD,mirror
